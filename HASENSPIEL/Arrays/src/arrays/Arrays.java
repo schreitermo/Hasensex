@@ -3,83 +3,44 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package arrays;
+package arrays; 
 
 import java.util.Random;
 import java.util.Scanner;
-
+import frameapi.*;
 /**
  *
  * @author Maurice
  */
 public class Arrays {
-        static int[][] sf = new int[40][40];
-        static int[][] hasen = new int[40][40];
-        static int[][] fuchse = new int[40][40];
-        static int zustand = 0;
+        static String[][] feld = new String[14][14];
+        static String[][] hasen = new String[14][14];
+        static String[][] fox = new String[14][14];
+        
         
     
     public static void main(String[] args) {
       
+    //setFelder();
         bauen();
-        umdieohrenhauen();
-        
-        Scanner sc = new Scanner(System.in);
-        while(sc.nextLine().equals("")){
-            zustand++;
-             for (int x=0; x<sf.length; x++){
-            for (int y=0; y<sf.length; y++){
-                int h = randint(20);
-                
-                if (hasen[x][y] == 1){
-                    int s = randint(5);
-                    if (s == 0){
-                        hasen[x][y] = sf[x][y];
-                    }
-                if (s == 1){
-                        hasen[x][y] = sf[x+1][y];
-                    }
-                if (s == 2){
-                        hasen[x][y] = sf[x-1][y];
-                    }
-                if (s == 3){
-                        hasen[x][y] = sf[x][y+1];
-                    }
-                if (s == 4){
-                        hasen[x][y] = sf[x][y-1];
-                    }
-                
-                }
-                
-                if (fuchse[x][y] == 4){
-                int s = randint(5);
-                    if (s == 0){
-                        fuchse[x][y] = sf[x][y];
-                    }
-                if (s == 1){
-                        fuchse[x][y] = sf[x+1][y];
-                    }
-                if (s == 2){
-                        fuchse[x][y] = sf[x-1][y];
-                    }
-                if (s == 3){
-                        fuchse[x][y] = sf[x][y+1];
-                    }
-                if (s == 4){
-                        fuchse[x][y] = sf[x][y-1];
-                    }
-                }
-                
+        FrameAPI.initFrame();
+        FrameAPI.initString(feld.length, feld);
+        FrameAPI.setPlayground();
+       
+        do {
+            if(FrameAPI.newRound){
                 
             
+               bauen();
+             
+                
+                FrameAPI.initString(feld.length, feld);
+                FrameAPI.setPlayground();
+            } else {
+                System.out.println();
+            }
+        } while(!FrameAPI.allDead);
             
-        }
-}      
-            
-            umdieohrenhauen();  
-            System.out.println("Aktuelle Runde: " + zustand);
-            System.out.println("Weiter?");
-        }
         
         
         
@@ -87,26 +48,26 @@ public class Arrays {
      
     }
     
-    private static int randint(int z){
+    public static int randint(int z){
         z++;
         Random rand = new Random();
         int r = rand.nextInt(z);
         return r;
     }
     
-    private static void bauen() {
-     for (int x=0; x<sf.length; x++){
-            for (int y=0; y<sf.length; y++){
+    public static void bauen() {
+     for (int x=0; x<feld.length; x++){
+            for (int y=0; y<feld.length; y++){
                 int h = randint(20);
-                sf[x][y] = 0;
+                feld[x][y] = ".";
                 if (h<2){
-                    sf[x][y] = 1;
-                    hasen[x][y] = 1;
+                    feld[x][y] = "H";
+                    hasen[x][y] = "H";
                 }
                 int f = randint(40);
                 if(f<2){
-                    sf[x][y] = 4;
-                    fuchse[x][y] = 4;
+                    feld[x][y] = "F";
+                    fox[x][y] = "F";
                     
                 }
                 
@@ -115,58 +76,48 @@ public class Arrays {
         }
 }
 
-    private static void umdieohrenhauen(){
-        for (int x=0; x<sf.length; x++){
-            for (int y=0; y<sf.length; y++){
-                System.out.print(sf[x][y]+ " ");
-                
-            } 
-            System.out.println();
-            
-        }   
-        }
 
-    private static void bauenundhüpfen() {
-     for (int x=0; x<sf.length; x++){
-            for (int y=0; y<sf.length; y++){
+    public static void bauenundhüpfen() {
+     for (int x=0; x<feld.length; x++){
+            for (int y=0; y<feld.length; y++){
                 int h = randint(20);
                 
-                if (hasen[x][y] == 1){
+                if (hasen[x][y] == "H"){
                     int s = randint(5);
                     if (s == 0){
-                        hasen[x][y] = sf[x][y];
+                        hasen[x][y] = feld[x][y];
                     }
                 if (s == 1){
-                        hasen[x][y] = sf[x+1][y];
+                        hasen[x][y] = feld[x+1][y];
                     }
                 if (s == 2){
-                        hasen[x][y] = sf[x-1][y];
+                        hasen[x][y] = feld[x-1][y];
                     }
                 if (s == 3){
-                        hasen[x][y] = sf[x][y+1];
+                        hasen[x][y] = feld[x][y+1];
                     }
                 if (s == 4){
-                        hasen[x][y] = sf[x][y-1];
+                        hasen[x][y] = feld[x][y-1];
                     }
                 
                 }
                 
-                if (fuchse[x][y] == 4){
+                if (fox[x][y] == "F"){
                 int s = randint(5);
                     if (s == 0){
-                        fuchse[x][y] = sf[x][y];
+                        fox[x][y] = feld[x][y];
                     }
                 if (s == 1){
-                        fuchse[x][y] = sf[x+1][y];
+                        fox[x][y] = feld[x+1][y];
                     }
                 if (s == 2){
-                        fuchse[x][y] = sf[x-1][y];
+                        fox[x][y] = feld[x-1][y];
                     }
                 if (s == 3){
-                        fuchse[x][y] = sf[x][y+1];
+                        fox[x][y] = feld[x][y+1];
                     }
                 if (s == 4){
-                        fuchse[x][y] = sf[x][y-1];
+                        fox[x][y] = feld[x][y-1];
                     }
                 }
                 
