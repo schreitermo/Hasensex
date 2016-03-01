@@ -31,7 +31,7 @@ public class Arrays {
             if(FrameAPI.newRound){
                 
             
-               bauen();
+               bauenundhuepfen();
              
                 
                 FrameAPI.initString(feld.length, feld);
@@ -58,16 +58,16 @@ public class Arrays {
     public static void bauen() {
      for (int x=0; x<feld.length; x++){
             for (int y=0; y<feld.length; y++){
-                int h = randint(20);
+                int h = randint(100);
                 feld[x][y] = ".";
                 if (h<2){
                     feld[x][y] = "H";
-                    hasen[x][y] = "H";
+                    //hasen[x][y] = "H";
                 }
-                int f = randint(40);
+                int f = randint(200);
                 if(f<2){
                     feld[x][y] = "F";
-                    fox[x][y] = "F";
+                    //fox[x][y] = "F";
                     
                 }
                 
@@ -77,55 +77,108 @@ public class Arrays {
 }
 
 
-    public static void bauenundhüpfen() {
-     for (int x=0; x<feld.length; x++){
+    public static void bauenundhuepfen() {
+    
+        for (int x=0; x<feld.length; x++){
+            
             for (int y=0; y<feld.length; y++){
-                int h = randint(20);
+                if(feld[0][y].equals("H")){
+                feld[x][y] = ".";
+                feld[12][y] = "H";
+            }
+                if(feld[x][0].equals("H")){
+                feld[x][y] = ".";
+                feld[x][12] = "H";
+            }
+                if(feld[13][y].equals("H")){
+                feld[x][y] = ".";
+                feld[1][y] = "H";
+            }  
+            if(feld[x][13].equals("H")){
+                feld[x][y] = ".";
+                feld[x][1] = "H";
+            }
+            if(feld[13][y].equals("F")){
+                feld[x][y] = ".";
+                feld[1][y] = "F";
+            }
+            if(feld[x][13].equals("F")){
+                feld[x][y] = ".";
+                feld[x][2] = "F";
+            }
+            if(feld[x][0].equals("F")){
+                feld[x][y] = ".";
+                feld[x][12] = "F";
+            }
+            if(feld[0][y].equals("F")){
+                feld[x][y] = ".";
+                feld[12][y] = "F";
+            }
                 
-                if (hasen[x][y] == "H"){
-                    int s = randint(5);
-                    if (s == 0){
-                        hasen[x][y] = feld[x][y];
-                    }
-                if (s == 1){
-                        hasen[x][y] = feld[x+1][y];
-                    }
-                if (s == 2){
-                        hasen[x][y] = feld[x-1][y];
-                    }
-                if (s == 3){
-                        hasen[x][y] = feld[x][y+1];
-                    }
-                if (s == 4){
-                        hasen[x][y] = feld[x][y-1];
-                    }
                 
-                }
                 
-                if (fox[x][y] == "F"){
+                
+                if (feld[x][y] == "F"){
                 int s = randint(5);
                     if (s == 0){
-                        fox[x][y] = feld[x][y];
+                        feld[x][y] = feld[x][y];
+                        
                     }
                 if (s == 1){
-                        fox[x][y] = feld[x+1][y];
-                    }
+                        feld[x][y] = feld[x+1][y];
+                        feld[x+1][y] = "F";
+                }
                 if (s == 2){
-                        fox[x][y] = feld[x-1][y];
-                    }
+                        feld[x][y] = feld[x-1][y];
+                        feld[x-1][y] = "F";
+                }
                 if (s == 3){
-                        fox[x][y] = feld[x][y+1];
-                    }
+                        feld[x][y] = feld[x][y+1];
+                        feld[x][y+1] = "F";
+                }
                 if (s == 4){
-                        fox[x][y] = feld[x][y-1];
-                    }
+                        feld[x][y] = feld[x][y-1];
+                        feld[x][y-1] = "F";
+                }
                 }
                 
+            
+                
+                if (feld[x][y] == "H"){
+                    int s = randint(5);
+                    if (s == 0){
+                        feld[x][y] = feld[x][y];
+                        
+                    }
+                    if (s == 1){
+                        feld[x][y] = feld[x+1][y];
+                        feld[x+1][y] = "H"; 
+                        
+                    }
+                    if (s == 2){
+                        feld[x][y] = feld[x-1][y];
+                        feld[x-1][y]  = "H";
+                    }
+                    if (s == 3){
+                        feld[x][y] = feld[x][y+1];
+                        feld[x][y+1] = "H";
+                    }
+                    if (s == 4){
+                        feld[x][y] = feld[x][y-1];
+                        feld[x][y-1] = "H";
+                    }
+                
+                    
+                }   
+                
+                
                 
             
             
-        }
-}   
+            
+            }   
+            
+    }   
 
 
 
