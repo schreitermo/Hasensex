@@ -14,6 +14,8 @@ import frameapi.*;
  */
 public class Arrays {
         static String[][] feld = new String[14][14];
+        static String[][] Speicherfeld = new String[14][14];
+
         static String[][] hasen = new String[14][14];
         static String[][] fox = new String[14][14];
         
@@ -58,16 +60,17 @@ public class Arrays {
     public static void bauen() {
      for (int x=0; x<feld.length; x++){
             for (int y=0; y<feld.length; y++){
-                int h = randint(100);
+                int h = randint(50);
                 feld[x][y] = ".";
                 if (h<2){
                     feld[x][y] = "H";
-                    //hasen[x][y] = "H";
+                    
+//
                 }
-                int f = randint(200);
+                int f = randint(50);
                 if(f<2){
                     feld[x][y] = "F";
-                    //fox[x][y] = "F";
+                    
                     
                 }
                 
@@ -79,97 +82,131 @@ public class Arrays {
 
     public static void bauenundhuepfen() {
     
-        for (int x=0; x<feld.length; x++){
-            
+          for (int x=0; x<feld.length; x++){
             for (int y=0; y<feld.length; y++){
-                if(feld[0][y].equals("H")){
-                feld[x][y] = ".";
-                feld[12][y] = "H";
-            }
-                if(feld[x][0].equals("H")){
-                feld[x][y] = ".";
-                feld[x][12] = "H";
-            }
-                if(feld[13][y].equals("H")){
-                feld[x][y] = ".";
-                feld[1][y] = "H";
-            }  
-            if(feld[x][13].equals("H")){
-                feld[x][y] = ".";
-                feld[x][1] = "H";
-            }
-            if(feld[13][y].equals("F")){
-                feld[x][y] = ".";
-                feld[1][y] = "F";
-            }
-            if(feld[x][13].equals("F")){
-                feld[x][y] = ".";
-                feld[x][2] = "F";
-            }
-            if(feld[x][0].equals("F")){
-                feld[x][y] = ".";
-                feld[x][12] = "F";
-            }
-            if(feld[0][y].equals("F")){
-                feld[x][y] = ".";
-                feld[12][y] = "F";
-            }
                 
-                
-                
-                
-                if (feld[x][y] == "F"){
-                int s = randint(5);
-                    if (s == 0){
-                        feld[x][y] = feld[x][y];
-                        
-                    }
-                if (s == 1){
-                        feld[x][y] = feld[x+1][y];
-                        feld[x+1][y] = "F";
+           Speicherfeld[x][y] = feld[x][y];     
+            }
+          }
+        
+          
+          
+          
+        int terrorist = randint(10);
+        if (terrorist <5){
+            for(int x=0; x<feld.length; x++){
+                for(int y=0; y<feld.length; y++){
+                    feld[x][y] = ",";
                 }
-                if (s == 2){
-                        feld[x][y] = feld[x-1][y];
-                        feld[x-1][y] = "F";
-                }
-                if (s == 3){
-                        feld[x][y] = feld[x][y+1];
-                        feld[x][y+1] = "F";
-                }
-                if (s == 4){
-                        feld[x][y] = feld[x][y-1];
-                        feld[x][y-1] = "F";
-                }
-                }
-                
+            }
             
-                
-                if (feld[x][y] == "H"){
+        }
+         
+          
+          
+          
+          for(int x=0; x<feld.length; x++){
+                for(int y=0; y<feld.length; y++){
+                    
+                if (Speicherfeld[x][y] == "H"){
                     int s = randint(5);
                     if (s == 0){
-                        feld[x][y] = feld[x][y];
+                        feld[x][y] = Speicherfeld[x][y];
                         
                     }
                     if (s == 1){
-                        feld[x][y] = feld[x+1][y];
-                        feld[x+1][y] = "H"; 
-                        
+                        feld[x][y] = ",";
+                        if(x<12)
+                            feld[x+1][y] = "H"; 
+                        else
+                            feld[0][y] = "H"; 
+
                     }
                     if (s == 2){
-                        feld[x][y] = feld[x-1][y];
+                        feld[x][y] = ",";
+                      if(x>2)
                         feld[x-1][y]  = "H";
+                      else
+                          feld[13][y] = "H";
+                          
+                    
                     }
                     if (s == 3){
-                        feld[x][y] = feld[x][y+1];
+                        feld[x][y] = ",";
+                      if(y<12)    
                         feld[x][y+1] = "H";
+                      else
+                          feld[x][y] = "H";
+                    
                     }
                     if (s == 4){
-                        feld[x][y] = feld[x][y-1];
+                        feld[x][y] = ",";
+                      if(y>2)  
                         feld[x][y-1] = "H";
+                      else
+                          feld[x][13] = "H";
+                    
                     }
                 
+                }     
                     
-                }   
+                    
+                    
+                }
+                
+            } 
+          
+          
+          for (int x=0; x<feld.length; x++){
+            for (int y=0; y<feld.length; y++){
+                
+        
+            if (Speicherfeld[x][y] == "F"){
+                int s = randint(5);
+                    if (s == 0){
+                        feld[x][y] = Speicherfeld[x][y];
+                        
+                    }
+                if (s == 1){
+                        feld[x][y] = ",";
+                      if(x<12)  
+                        feld[x+1][y] = "F";
+                      else
+                          feld[0][y] = "F";
+                }
+                if (s == 2){
+                        feld[x][y] = ",";
+                      if(x>2)   
+                        feld[x-1][y] = "F";
+                      else
+                          feld[13][y] = "F";
+                
+                }
+                if (s == 3){
+                        feld[x][y] = ",";
+                       if(y<12) 
+                        feld[x][y+1] = "F";
+                       else
+                           feld[x][0] = "F";
+                
+                }
+                if (s == 4){
+                        feld[x][y] = ",";
+                       if(y>2) 
+                        feld[x][y-1] = "F";
+                       else
+                           feld[x][12] = "F";
+                }
+                }
+            }
+          }
+            
+          
+          
+          
+          
+                
+                  
                 
                 
                 
@@ -184,7 +221,16 @@ public class Arrays {
 
 
 
-    }
-}
+    
+
+    
+
+
+
+
+
+
+
+
     
 
