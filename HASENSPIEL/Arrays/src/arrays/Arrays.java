@@ -78,41 +78,16 @@ public class Arrays {
             
         }
 }
-
-
-    public static void bauenundhuepfen() {
     
-          for (int x=0; x<feld.length; x++){
-            for (int y=0; y<feld.length; y++){
-                
-           Speicherfeld[x][y] = feld[x][y];     
-            }
-          }
-        
-          
-          
-          
-        int terrorist = randint(10);
-        if (terrorist <5){
-            for(int x=0; x<feld.length; x++){
-                for(int y=0; y<feld.length; y++){
-                    feld[x][y] = ",";
-                }
-            }
-            
-        }
-         
-          
-          
-          
-          for(int x=0; x<feld.length; x++){
+    public static void moveHasen(){
+    for(int x=0; x<feld.length; x++){
                 for(int y=0; y<feld.length; y++){
                     
                 if (Speicherfeld[x][y] == "H"){
                     int s = randint(5);
                     if (s == 0){
                         feld[x][y] = Speicherfeld[x][y];
-                        
+                       
                     }
                     if (s == 1){
                         feld[x][y] = ",";
@@ -154,10 +129,11 @@ public class Arrays {
                     
                 }
                 
-            } 
-          
-          
-          for (int x=0; x<feld.length; x++){
+            }    
+    }
+    
+    public static void moveFuechse (){
+    for (int x=0; x<feld.length; x++){
             for (int y=0; y<feld.length; y++){
                 
         
@@ -197,23 +173,56 @@ public class Arrays {
                        else
                            feld[x][12] = "F";
                 }
+                
+                
+                if (Speicherfeld[x][y] == "F" && feld[x][y] == "F"){
+                feld[x][y] = "F";
+                feld[x+1][y] = "F";
+                feld[x-1][y] = "F";
+            
+                
                 }
+            
+            
             }
-          }
-            
-          
-          
-          
-          
-                
-                  
-                
-                
-                
             
             
             
-            }   
+            }
+          }    
+    }
+    
+    public static void abinssf (){
+    for (int x=0; x<feld.length; x++){
+            for (int y=0; y<feld.length; y++){
+                
+           Speicherfeld[x][y] = feld[x][y];     
+            }
+          }    
+    }
+    
+    public static void maybeterror (){
+        int terror = randint(10);
+        if (terror == 9){
+        for(int x=0; x>feld.length; x++ ){
+            for(int y=0; y<feld.length; y++){
+                feld[x][y] =  ",";
+            }
+        }
+    }
+    
+    }
+    
+    public static void bauenundhuepfen() {
+    
+    abinssf();    
+    moveHasen(); 
+    moveFuechse();      
+    //maybeterror();
+    
+          
+            
+    }   
             
     }   
 
