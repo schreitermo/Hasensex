@@ -8,6 +8,8 @@ package arrays;
 import java.util.Random;
 import java.util.Scanner;
 import frameapi.*;
+import java.awt.Component;
+import javax.swing.JOptionPane;
 /**
  *
  * @author Maurice
@@ -123,6 +125,26 @@ public class Arrays {
                     
                     }
                 
+                if (feld[x][y]. equals("H")){
+                int fery = randint(10);
+                
+                if(fery<2){
+                    feld[x][y] = "H";
+                    
+                if(x<12)  
+                        feld[x+1][y] = "H";
+                      else
+                          feld[0][y] = "H";    
+                
+                
+                }
+            
+               
+            
+            
+            }
+                
+                
                 }     
                     
                     
@@ -138,10 +160,12 @@ public class Arrays {
                 
         
             if (Speicherfeld[x][y] == "F"){
+                
+                
                 int s = randint(5);
                     if (s == 0){
                         feld[x][y] = Speicherfeld[x][y];
-                        
+                    terrorbeifery();    
                     }
                 if (s == 1){
                         feld[x][y] = ",";
@@ -174,14 +198,25 @@ public class Arrays {
                            feld[x][12] = "F";
                 }
                 
+                if (feld[x][y]. equals("F")){
+                int fery = randint(10);
                 
-                if (Speicherfeld[x][y] == "F" && feld[x][y] == "F"){
-                feld[x][y] = "F";
-                feld[x+1][y] = "F";
-                feld[x-1][y] = "F";
-            
+                if(fery<2){
+                    feld[x][y] = "F";
+                    
+                if(x<12)  
+                        feld[x+1][y] = "F";
+                      else
+                          feld[0][y] = "F";    
+                
                 
                 }
+            
+               
+            
+            
+            }
+                
             
             
             }
@@ -201,14 +236,21 @@ public class Arrays {
           }    
     }
     
-    public static void maybeterror (){
-        int terror = randint(10);
-        if (terror == 9){
-        for(int x=0; x>feld.length; x++ ){
+    public static void terrorbeifery (){
+        int terror = randint(100);
+        if (terror == 0){
+        for(int x=0; x<feld.length; x++ ){
             for(int y=0; y<feld.length; y++){
-                feld[x][y] =  ",";
+                if (feld[x][y]  == "H"){
+                    feld[x][y] = "R";
+                }
+                if (feld[x][y]  == "F"){
+                    feld[x][y] = "R";
+                }
             }
         }
+        
+        JOptionPane.showMessageDialog(null,"BREAKING NEWS: Terroranschlag auf der Hasenwiese. Osama bin Hase ist zurück!");    
     }
     
     }
@@ -216,9 +258,10 @@ public class Arrays {
     public static void bauenundhuepfen() {
     
     abinssf();    
+    
     moveHasen(); 
     moveFuechse();      
-    //maybeterror();
+    
     
           
             
